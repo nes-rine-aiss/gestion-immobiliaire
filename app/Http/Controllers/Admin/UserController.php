@@ -46,7 +46,7 @@ class UserController extends Controller
         ]);
         $user->assignRole($data['roles']);
 
-        return redirect()->route('users.index')->with('success', 'User created successfully.');
+        return redirect()->route('users.index')->with('success', 'Utilisateur cree avec succès.');
     }
 
 
@@ -97,6 +97,6 @@ class UserController extends Controller
     {
         $user->delete();
         return redirect()->route('users.index')
-            ->with('success', 'User deleted successfully');
+            ->with('success', 'Utilisateur supprime avec succès');
     }
 }

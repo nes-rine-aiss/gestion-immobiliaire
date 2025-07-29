@@ -1,9 +1,10 @@
 <x-app-layout>
     <x-slot name="header">
         <div class="flex flex-col md:flex-row items-start md:items-center justify-between mb-6">
-            <h2 class="text-2xl font-semibold text-gray-800">Edit User</h2>
-            <a href="{{ route('users.index') }}" class="inline-flex items-center px-3 py-2 bg-blue-600 hover:bg-blue-700 text-white text-sm font-medium rounded-md mt-4 md:mt-0">
-                <i class="fa fa-arrow-left mr-2"></i> Back
+            <h2 class="text-2xl font-semibold text-gray-800">Modifier un utilisateur</h2>
+            <a href="{{ route('users.index') }}"
+                class="inline-flex items-center px-4 py-2 bg-blue-600 gap-3 hover:bg-blue-700 text-white text-sm font-medium rounded-md mt-4 md:mt-0">
+                <x-heroicon-o-arrow-left class="w-4 h-4" />Retour
             </a>
         </div>
     </x-slot>
@@ -26,8 +27,8 @@
 
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
                 <div>
-                    <label class="block mb-1 text-sm font-medium text-gray-700">Name:</label>
-                    <input type="text" name="name" value="{{ $user->name }}" placeholder="Name"
+                    <label class="block mb-1 text-sm font-medium text-gray-700">Nom:</label>
+                    <input type="text" name="name" value="{{ $user->name }}" placeholder="Nom"
                         class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring focus:border-blue-400">
                 </div>
 
@@ -40,13 +41,15 @@
 
                 <div class="md:col-span-2">
                     <label class="block mb-2 text-sm font-medium text-gray-700">Roles:</label>
-                    <div class="flex flex-wrap gap-4">
+                    <div class="flex flex-col gap-4">
                         @foreach ($roles as $value => $label)
                         <label class="flex items-center space-x-2">
-                            <input type="checkbox" name="roles[]" value="{{ $value }}"
+                            <!-- for multiple <input type="checkbox" name="roles[]" value="{{ $value }}" -->
+
+                            <input type="radio" name="roles[]" value="{{ $value }}"
                                 class="text-blue-600 rounded border-gray-300 focus:ring focus:ring-blue-200"
                                 {{ isset($userRole[$value]) ? 'checked' : '' }}>
-                            <span class="text-sm text-gray-700">{{ $label }}</span>
+                            <span class="text-sm text-gray-700 capitalize">{{ $label }}</span>
                         </label>
                         @endforeach
                     </div>
@@ -55,32 +58,37 @@
 
             <div class="text-center">
                 <button type="submit"
-                    class="inline-flex items-center px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white text-sm font-medium rounded">
-                    <i class="fa-solid fa-floppy-disk mr-2"></i> Submit
+                    class="inline-flex items-center px-4 py-2 gap-3 bg-blue-600 hover:bg-blue-700 text-white text-sm font-medium rounded">
+                    Enregistrer <x-fas-floppy-disk class="w-4 h-4" />
                 </button>
             </div>
         </form>
-        <form action="{{ route('users.update-password', $user->id) }}" method="POST">
+        <form action="{{ route('users.update-password', $user->id) }}" method="POST" class="mt-8">
             @csrf
             @method('PUT')
+                       <h2 class="text-2xl font-semibold text-gray-800 mb-4">Modifier un utilisateur </h2>
 
-            <div>
-                <label class="block mb-1 text-sm font-medium text-gray-700">Password:</label>
-                <input type="password" name="password" placeholder="Password"
-                    class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring focus:border-blue-400">
-            </div>
+            <div class="grid grid-cols-2 gap-4 ">
 
-            <div>
-                <label class="block mb-1 text-sm font-medium text-gray-700">Confirm Password:</label>
-                <input type="password" name="password_confirmation" placeholder="Confirm Password"
-                    class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring focus:border-blue-400">
+
+                <div>
+                    <label class="block mb-1 text-sm font-medium text-gray-700">Mot de passe:</label>
+                    <input type="password" name="password" placeholder="Mot de passe"
+                        class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring focus:border-blue-400">
+                </div>
+
+                <div>
+                    <label class="block mb-1 text-sm font-medium text-gray-700">Confirmer ton mot de passe :</label>
+                    <input type="password" name="password_confirmation" placeholder="Confirmer ton mot de passe "
+                        class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring focus:border-blue-400">
+                </div>
             </div>
 
 
             <div class="text-center mt-4">
                 <button type="submit"
-                    class="inline-flex items-center px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white text-sm font-medium rounded">
-                    <i class="fa-solid fa-floppy-disk mr-2"></i> Submit
+                    class="inline-flex items-center px-4 py-2 gap-3 bg-blue-600 hover:bg-blue-700 text-white text-sm font-medium rounded">
+                    Enregistrer <x-fas-floppy-disk class="w-4 h-4" />
                 </button>
             </div>
         </form>
