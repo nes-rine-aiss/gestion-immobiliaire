@@ -7,11 +7,13 @@ use Spatie\Permission\Models\Role;
 use Spatie\Permission\Models\Permission;
 
 
+use App\Http\Controllers\Controller;
+
 class SuperAdminController extends Controller
 {
     // public function __construct()
     // {
-    //     $this->middleware(['auth', 'role:superadmin']);
+    //     $this->middleware('permission:manage_all_users')->only(['users','assignRole']);
     // }
 
     public function dashboard()
