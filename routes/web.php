@@ -9,7 +9,7 @@ Route::get('/', function () {
 });
 
 Route::get('/dashboard', function () {
-    return view('dashboardadmin');
+    return view('dashboard');
 })->middleware(['auth'])->name('dashboard');
 
 
@@ -28,8 +28,8 @@ Route::get('/dashboard', function () {
 ################## Actions pour tous le monde pas de middlware role ################
 
 Route::middleware(['auth'])->group(function () {
-    Route::get('/dashbord', function () {
-        return view('dashbordproprietaire');
+    Route::get('/test', function () {
+        return view('test');
     })->name('test');
 });
 
